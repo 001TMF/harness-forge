@@ -9,16 +9,17 @@
 #   CLAUDE_SKILLS_DIR   override the destination skills directory
 set -euo pipefail
 
-SKILL="meta-harness"
+SKILL="meta-harness"               # installed skill folder name
+SRC_PATH="skills/meta-harness"     # location within the harness-forge repo
 REPO="https://github.com/001TMF/harness-forge.git"
 DEST="${CLAUDE_SKILLS_DIR:-$HOME/.claude/skills}"
 [ "${1:-}" = "--project" ] && DEST=".claude/skills"
 
 mkdir -p "$DEST"
 
-if [ -f "$SKILL/SKILL.md" ]; then
+if [ -f "$SRC_PATH/SKILL.md" ]; then
   # running from a local clone — copy directly
-  SRC="$SKILL"
+  SRC="$SRC_PATH"
 else
   # piped via curl — fetch the repo into a temp dir
   command -v git >/dev/null 2>&1 || { echo "error: git is required" >&2; exit 1; }
@@ -26,7 +27,7 @@ else
   trap 'rm -rf "$TMP"' EXIT
   echo "Fetching harness-forge..."
   git clone --depth 1 --quiet "$REPO" "$TMP"
-  SRC="$TMP/$SKILL"
+  SRC="$TMP/$SRC_PATH"
 fi
 
 rm -rf "${DEST:?}/$SKILL"

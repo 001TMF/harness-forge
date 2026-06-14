@@ -5,7 +5,7 @@
 **Turn Claude Code into its own Meta-Harness — evolve the scaffolding around a fixed model, natively.**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Claude Code skill](https://img.shields.io/badge/Claude%20Code-skill-D97757)](meta-harness/SKILL.md)
+[![Claude Code skill](https://img.shields.io/badge/Claude%20Code-skill-D97757)](skills/meta-harness/SKILL.md)
 [![method: Meta-Harness (Lee et al. 2026)](https://img.shields.io/badge/method-Meta--Harness%20(Lee%20et%20al.%202026)-555)](https://arxiv.org/abs/2603.28052)
 
 </div>
@@ -81,7 +81,7 @@ Or as a Claude Code **plugin** (inside Claude Code):
 
 ```
 /plugin marketplace add 001TMF/harness-forge
-/plugin install harness-forge@harness-forge
+/plugin install harness-forge@tmf-skills
 ```
 
 <details><summary>Other ways</summary>
@@ -90,12 +90,12 @@ Or as a Claude Code **plugin** (inside Claude Code):
 # project-scoped (./.claude/skills, this repo only)
 curl -fsSL https://raw.githubusercontent.com/001TMF/harness-forge/main/install.sh | bash -s -- --project
 
-# via skills.sh
-npx add-skill 001TMF/harness-forge
+# via skills.sh (vercel-labs/skills)
+npx skills add 001TMF/harness-forge --skill meta-harness -a claude-code
 
 # manual
 git clone https://github.com/001TMF/harness-forge.git
-cp -r harness-forge/meta-harness ~/.claude/skills/meta-harness
+cp -r harness-forge/skills/meta-harness ~/.claude/skills/meta-harness
 ```
 </details>
 
@@ -125,8 +125,8 @@ no metered API**. A successful round produces a compressor holding fidelity at *
 ## What you supply (the five blocks)
 
 The loop is native; the **domain** is yours. Templates are in
-[`meta-harness/assets/`](meta-harness/assets); how-to is in
-[`references/building-blocks.md`](meta-harness/references/building-blocks.md):
+[`skills/meta-harness/assets/`](skills/meta-harness/assets); how-to is in
+[`references/building-blocks.md`](skills/meta-harness/references/building-blocks.md):
 
 1. **Candidate interface** — one clean, swappable boundary (an ABC / Protocol).
 2. **A $0 deterministic scorer + rubric** — the inner loop; runs hundreds of times, so no LLM, no
@@ -134,7 +134,7 @@ The loop is native; the **domain** is yours. Templates are in
 3. **An eval corpus with a held-out split.**
 4. **A proposer prior** — a mini-skill steering proposers toward *mechanism-level* changes (not
    constant-tuning) and forbidding eval-set leakage.
-5. **A frontier + run log** — the state. [`scripts/pareto.py`](meta-harness/scripts/pareto.py)
+5. **A frontier + run log** — the state. [`scripts/pareto.py`](skills/meta-harness/scripts/pareto.py)
    computes the floor-respecting frontier deterministically.
 
 ---
@@ -153,7 +153,7 @@ frozen quality score never drops, producing a confident, meaningless frontier.
 fidelity, a counterfactual decision), and/or run quality as a one-sided *do-no-harm floor* rather
 than a maximize axis. The skill makes this — plus held-out discipline, an anti-Goodhart floor, and
 anti-leakage — load-bearing. Full treatment in
-[`references/method.md`](meta-harness/references/method.md).
+[`references/method.md`](skills/meta-harness/references/method.md).
 
 ---
 
@@ -161,11 +161,14 @@ anti-leakage — load-bearing. Full treatment in
 
 ```
 harness-forge/
-├── meta-harness/                 # the installable skill
-│   ├── SKILL.md                  #   what/when, the loop, the 5 blocks, the guardrails
-│   ├── references/               #   method · native-execution · building-blocks · worked example
-│   ├── assets/                   #   templates: workflow loop, scorer, interface, proposer prior
-│   └── scripts/pareto.py         #   reusable floor-respecting Pareto frontier
+├── .claude-plugin/marketplace.json   # installable as a Claude Code plugin
+├── install.sh                        # one-line curl|bash install
+├── skills/
+│   └── meta-harness/             # the installable skill
+│       ├── SKILL.md              #   what/when, the loop, the 5 blocks, the guardrails
+│       ├── references/           #   method · native-execution · building-blocks · worked example
+│       ├── assets/               #   templates: workflow loop, scorer, interface, proposer prior
+│       └── scripts/pareto.py     #   reusable floor-respecting Pareto frontier
 └── examples/
     └── memory-summary/           # a complete, runnable search (the $0 demo + the native loop)
 ```
@@ -182,7 +185,7 @@ bloat, weak retrieval, lossy summarization, brittle prompt scaffolds.
 there is no stable evaluation loop. Meta-Harness and RL are complementary: in a fixed-base-model
 phase, Harness Forge is the *only* available optimizer — and it forces the eval-hardening a later
 RL phase also depends on, at near-zero cost. See
-[`references/method.md`](meta-harness/references/method.md) §6.
+[`references/method.md`](skills/meta-harness/references/method.md) §6.
 
 ---
 

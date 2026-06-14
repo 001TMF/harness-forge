@@ -1,22 +1,27 @@
 {
-  "name": "harness-forge",
+  "name": "tmf-skills",
   "owner": {
     "name": "Tristan Farmer",
     "email": "tristan@phytovenomics.bio"
   },
   "metadata": {
-    "description": "Native Meta-Harness — autonomous harness evolution as a Claude Code skill",
+    "description": "Skills by 001TMF",
     "version": "1.0.0"
   },
   "plugins": [
     {
       "name": "harness-forge",
-      "description": "Run a Meta-Harness optimization loop natively: propose scaffolding variants around a fixed model, score each with a $0 deterministic test, keep the Pareto-best, loop.",
       "source": "./",
+      "description": "Native Meta-Harness — run a harness-optimization loop natively: propose scaffolding variants around a fixed model, score each with a $0 deterministic test, keep the Pareto-best, loop.",
+      "version": "1.0.0",
+      "author": { "name": "Tristan Farmer", "email": "tristan@phytovenomics.bio" },
+      "homepage": "https://github.com/001TMF/harness-forge",
+      "repository": "https://github.com/001TMF/harness-forge",
+      "license": "MIT",
+      "keywords": ["meta-harness", "harness-optimization", "scaffold-evolution", "pareto", "prompt-optimization"],
+      "category": "development-workflows",
       "strict": false,
-      "skills": [
-        "./meta-harness"
-      ]
+      "skills": ["./skills/meta-harness"]
     }
   ]
 }
