@@ -1,11 +1,21 @@
-# Harness Forge
+<div align="center">
+
+<pre>
+ _   _                                  _____
+| | | | __ _ _ __ _ __   ___  ___ ___  |  ___|__  _ __ __ _  ___
+| |_| |/ _` | '__| '_ \ / _ \/ __/ __| | |_ / _ \| '__/ _` |/ _ \
+|  _  | (_| | |  | | | |  __/\__ \__ \ |  _| (_) | | | (_| |  __/
+|_| |_|\__,_|_|  |_| |_|\___||___/___/ |_|  \___/|_|  \__, |\___|
+                                                      |___/
+</pre>
 
 **Turn Claude Code into its own Meta-Harness — evolve the scaffolding around a fixed model, natively.**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Claude Code skill](https://img.shields.io/badge/Claude%20Code-skill-D97757)](meta-harness/SKILL.md)
 [![method: Meta-Harness (Lee et al. 2026)](https://img.shields.io/badge/method-Meta--Harness%20(Lee%20et%20al.%202026)-555)](https://arxiv.org/abs/2603.28052)
-[![GitHub stars](https://img.shields.io/github/stars/001TMF/harness-forge?style=social)](https://github.com/001TMF/harness-forge)
+
+</div>
 
 Harness Forge is a [Claude Code](https://claude.com/claude-code) skill that runs an end-to-end
 **harness-optimization loop** — propose → score → keep the Pareto-best → repeat — to improve the
