@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Search run artifacts
+logs/
+*.log
+
+# OS
+.DS_Store

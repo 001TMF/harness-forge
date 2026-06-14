@@ -1,0 +1,22 @@
+# proteus memory-summary search — configuration
+#
+# COST MODEL: nothing here hits a paid API.
+#   - inner loop (scoring)  : $0, pure-Python, no model
+#   - proposer (candidate writer): your Claude Pro/Max SUBSCRIPTION via the
+#     `claude` CLI. meta_harness.py strips ANTHROPIC_API_KEY so it uses
+#     subscription auth, never metered API.
+# There is NO solver model in this search (unlike the text-classification
+# example), so OpenRouter / a vLLM endpoint are not needed at all.
+
+proposer:
+  model: sonnet          # subscription model for the proposer; "opus" = higher
+                         # quality candidates, more subscription quota per run
+  effort: null           # set "max" for opus deep-reasoning proposals
+  timeout_seconds: 1800
+
+search:
+  # Do-no-harm floor: a candidate whose worst-record fidelity drops below this
+  # is rejected from the frontier, so the optimizer cannot "win" by emptying the
+  # summary. Raise toward 1.0 to demand near-lossless compression.
+  fidelity_floor: 0.70
+  objective: "minimize chars subject to fidelity >= floor (Pareto: fidelity up, chars down)"
