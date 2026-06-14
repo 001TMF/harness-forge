@@ -71,14 +71,35 @@ orchestration-shaped is free.
 
 ## Quick start
 
-**1. Install the skill** (Claude Code):
+**1. Install the skill** — one line:
 
 ```bash
+curl -fsSL https://raw.githubusercontent.com/001TMF/harness-forge/main/install.sh | bash
+```
+
+Or as a Claude Code **plugin** (inside Claude Code):
+
+```
+/plugin marketplace add 001TMF/harness-forge
+/plugin install harness-forge@harness-forge
+```
+
+<details><summary>Other ways</summary>
+
+```bash
+# project-scoped (./.claude/skills, this repo only)
+curl -fsSL https://raw.githubusercontent.com/001TMF/harness-forge/main/install.sh | bash -s -- --project
+
+# via skills.sh
+npx add-skill 001TMF/harness-forge
+
+# manual
 git clone https://github.com/001TMF/harness-forge.git
 cp -r harness-forge/meta-harness ~/.claude/skills/meta-harness
 ```
+</details>
 
-It will auto-trigger when you talk about optimizing a harness, scaffold, prompt system, memory or
+It auto-triggers when you talk about optimizing a harness, scaffold, prompt system, memory or
 retrieval policy, or summarizer — or invoke it directly as the `meta-harness` skill.
 
 **2. Run the worked example** ($0, no model, no network):

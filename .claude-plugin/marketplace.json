@@ -1,0 +1,22 @@
+{
+  "name": "harness-forge",
+  "owner": {
+    "name": "Tristan Farmer",
+    "email": "tristan@phytovenomics.bio"
+  },
+  "metadata": {
+    "description": "Native Meta-Harness — autonomous harness evolution as a Claude Code skill",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "harness-forge",
+      "description": "Run a Meta-Harness optimization loop natively: propose scaffolding variants around a fixed model, score each with a $0 deterministic test, keep the Pareto-best, loop.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./meta-harness"
+      ]
+    }
+  ]
+}
